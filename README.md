@@ -39,4 +39,7 @@ nameinfo.sh
 elastic_tool.sh
 '---> Quick info / docs from ElasticSearch
       Just a quick bash-script to get info from ElasticSearch. No need for parameters, should ask for everything needed. Might need to change the /usr/bin/curl part to point to your curl -location.
+      
+pingExfil
+'---> Exfiltrate data through PING packets
 </pre>
