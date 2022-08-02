@@ -62,7 +62,6 @@ else
                         then
                                 HMASTER="1"
                         fi
-
                 else
                         echo "|  FILE .git/$file not found! "
                 fi
