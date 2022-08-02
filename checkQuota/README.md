@@ -1,3 +1,4 @@
+<pre>
 A shell script to automatically check your Elisa consumer mailbox quota through wm
 
 Just add your addresses to mailadds file in the format of one per row:
@@ -14,3 +15,4 @@ SENDERADD="poller@pollerdomain.com"
 RECIPIENT="someone@yourdomain.net"
 
 Run or cron.
+</pre>
