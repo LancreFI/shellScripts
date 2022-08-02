@@ -35,4 +35,8 @@ nameinfo.sh
 '---> Check every kind of DNS-record for a domain, check a couple of common TXT-records, robots file and whois
       Just another quick script to check info on a domain, sometimes useful for CTF's.
       Add more power by combining with gitGet.sh and well-known.sh
+      
+elastic_tool.sh
+'---> Quick info / docs from ElasticSearch
+      Just a quick bash-script to get info from ElasticSearch. No need for parameters, should ask for everything needed. Might need to change the /usr/bin/curl part to point to your curl -location.
 </pre>
