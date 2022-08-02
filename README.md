@@ -11,3 +11,9 @@ gitGet.sh
 
 reconv.sh
 '---> After converting VMGs to human readable files with vmgconv.sh, reconvert the message content from the messages to one single file MESCON.
+
+vmgconv.sh
+'---> Convert old Nokia .vmg SMS-messages to a more readable format.
+      Usage: place in the same folder with the .vmg files and run "bash vmgconv.sh"
+      It will remove the garbage and then output the content to originalfile_conv file.
+      Only recodes both upper- and lowercase åäö at the moment out of the special characters.
