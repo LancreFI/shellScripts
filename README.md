@@ -30,4 +30,9 @@ well-known.sh
 '---> Check for /.well-known/ registered URI's (RFC8615)
       Another CTF-script for recon/web.
       Maybe useful to bundle with gitGet.sh and nameinfo.sh
+      
+nameinfo.sh
+'---> Check every kind of DNS-record for a domain, check a couple of common TXT-records, robots file and whois
+      Just another quick script to check info on a domain, sometimes useful for CTF's.
+      Add more power by combining with gitGet.sh and well-known.sh
 </pre>
