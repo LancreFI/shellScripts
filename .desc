@@ -1,2 +1,3 @@
 gitGet.sh
 reconv.sh
+'---> After converting VMGs to human readable files with vmgconv.sh, reconvert the message content from the messages to one single file MESCON.
