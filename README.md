@@ -24,5 +24,5 @@ utf2dec.sh
       This script converts characters to UTF8 codepoints and then to (HTML) decimal format.
       Usage example:
             [user@some]$ bash utf2dec.sh sometext
-            &#115;&#111;&#109;&#101;&#116;&#101;&#120;&#116;
+            &#38;#115;&#38;#111;&#38;#109;&#38;#101;&#38;#116;&#38;#101;&#38;#120;&#38;#116;
 </pre>
