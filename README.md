@@ -25,4 +25,9 @@ utf2dec.sh
       Usage example:
             [user@some]$ bash utf2dec.sh sometext
             &#38;#115;&#38;#111;&#38;#109;&#38;#101;&#38;#116;&#38;#101;&#38;#120;&#38;#116;
+            
+well-known.sh
+'---> Check for /.well-known/ registered URI's (RFC8615)
+      Another CTF-script for recon/web.
+      Maybe useful to bundle with gitGet.sh and nameinfo.sh
 </pre>
