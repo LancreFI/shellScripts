@@ -11,6 +11,7 @@ THRESH=90
 SENDERNAME="POLLER"
 SENDERADD="poller@pollerdomain.com"
 RECIPIENT="someone@yourdomain.net"
+BACKUPRCP="someelse@anotherdoma.in"
 
 ADDS=($(cat "$ACCDATA"|grep -o ^.*:|sed -e 's/://'))
 PWS=($(cat "$ACCDATA"|grep -o :.*$|sed 's/://'))
@@ -75,7 +76,12 @@ echo "#-->$PERC" >> "$LOGFILE"
 if [ "$PERCheck" -ge 95 ]
 then
         echo "#   USAGE IS OVER $THRESH%, NOTIFYING $RECIPIENT!" >> "$LOGFILE"
-        mail -s "MAILBOX GETTING FULL FOR USER $USR!" -aFrom:"$SENDERNAME"\<"$SENDERADD"\> "$RECIPIENT" <<< "MAILBOX GETTING FULL FOR $USR, QUOTA USED $PERC = $MEGS"
+        if  [[ "${USR}" == "${RECIPIENT}" ]]
+        then
+                mail -s "MAILBOX GETTING FULL FOR USER $USR!" -aFrom:"$SENDERNAME"\<"$SENDERADD"\> "$BACKUPRCP" <<< "MAILBOX GETTING FULL FOR $USR, QUOTA USED $PERC = $MEGS"
+        else
+                mail -s "MAILBOX GETTING FULL FOR USER $USR!" -aFrom:"$SENDERNAME"\<"$SENDERADD"\> "$RECIPIENT" <<< "MAILBOX GETTING FULL FOR $USR, QUOTA USED $PERC = $MEGS"
+        fi
 fi
 
 echo "#########################################################" >> "$LOGFILE"
