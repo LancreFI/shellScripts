@@ -1,4 +1,9 @@
 <pre>
+pwncheck.sh
+'---> Check leak info for email addresses from HaveIBeenPwned. You need a paid API-key to be able to carve data and you also need to set your own user-agent, which can       be anything of your choosing.
+      The script is run by: bash pwncheck.sh email@tobe.check.ed
+      The script only takes one address at a time and sleeps 1.5 seconds between API requests, as it is the current limit on the API's side.
+      You could have multiple addresses in a file, each on it's own row and run multiple searches like:  for user in $(cat addresses); do bash pwncheck.sh "${user}"; done
 gitGet.sh
 '---> Carve/download files from public facing .git/ where directory listing is disabled
       Still unfinished. At the moment only downloads from the root dir of a host (target.host/.git/) also would require a lot more of error checking etc.
