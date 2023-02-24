@@ -136,9 +136,9 @@ do
 	printf "${CHARARR[${keys}]}"
 done
 echo
-echo "                |"
-echo "                '--> Becomes: "
-echo "                     $ITER3"
+echo "               |"
+echo "               '--> Becomes: "
+echo "                    $ITER3"
 ORIG=()
 CNTR=0
 #DECRYPTING THE ORIGINAL CIPHER
@@ -162,17 +162,17 @@ do
 	((CNTR++))
 done
 
-echo "                     |"
-echo "                     '--> Decrypted with key 1: "
-printf "                          "
+echo "                    |"
+echo "                    '--> Decrypted with key 1: "
+printf "                         "
 for keys in "${KEY1[@]}"
 do
 	printf "${CHARARR[${keys}]}"
 done
 echo
-echo "                          |"
-echo "                          '--> Becomes the original message: "
-printf "                               "
+echo "                         |"
+echo "                         '--> Becomes the original message: "
+printf "                              "
 for keys in "${ORIG[@]}"
 do
 	printf "${CHARARR[${keys}]}"
