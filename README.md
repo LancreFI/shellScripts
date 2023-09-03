@@ -1,9 +1,9 @@
 <pre>
+bashcord.sh
+'---> Using a discord bot over bash/curl.
+      
 checkQuota
 '---> A cronable script to poll your Elisa consumer mailbox quota and raise alerts if needed.
-      
-pingExfil
-'---> Exfiltrate data through PING packets
 
 elastic_tool.sh
 '---> Quick info / docs from ElasticSearch
@@ -29,6 +29,9 @@ nameinfo.sh
 '---> Check every kind of DNS-record for a domain, check a couple of common TXT-records, robots file and whois
       Just another quick script to check info on a domain, sometimes useful for CTF's.
       Add more power by combining with gitGet.sh and well-known.sh
+
+pingExfil
+'---> Exfiltrate data through PING packets
       
 pwncheck.sh
 '---> Check leak info for email addresses from HaveIBeenPwned. You need a paid API-key to be able to carve data and you also need to set your own user-agent, which can be 
