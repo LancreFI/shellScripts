@@ -5,6 +5,10 @@ bashcord.sh
 checkQuota
 '---> A cronable script to poll your Elisa consumer mailbox quota and raise alerts if needed.
 
+discobot.sh
+'---> A script you can use as a Discord bot that can receive triggers to start, stop, restart and check a Proxmox vm status. Use in combination with proxmox_user.sh (details 
+      a few rows further). Doesn't require any parameters, just run with "bash discobot.sh".
+
 elastic_tool.sh
 '---> Quick info / docs from ElasticSearch
       Just a quick bash-script to get info from ElasticSearch. No need for parameters, should ask for everything needed. Might need to change the /usr/bin/curl part to point to 
