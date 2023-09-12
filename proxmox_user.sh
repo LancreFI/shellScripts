@@ -23,39 +23,40 @@ else
 fi
 PVEAPIToken="${api_user}!${token_id}=${token}"
 
-function statusCheck()
+
+function vmTask()
 {
-        status_response=$(curl -s -X "GET" -k -H "Authorization: PVEAPIToken=${PVEAPIToken}" \
+        task="${1}"
+        method=""
+
+        if [[ "${task}" == "status" ]]
+        then
+                method="GET"
+                status_response=$(curl -s -X "$method" -k -H "Authorization: PVEAPIToken=${PVEAPIToken}" \
                         "https://${proxmox}:${port}/${api}/json/nodes/${node}/qemu/${vmid}/status/current")
-        status=$(grep -Po "\"status\":\"\w+\"" <<< "${status_response}" | sed -r 's/.*:"(\w+)"/\1/')
+                status=$(grep -Po "\"status\":\"\w+\"" <<< "${status_response}" | sed -r 's/.*:"(\w+)"/\1/')
+        else
+                method="POST"
+                status_response=$(curl -s -X "$method" -k -H "Authorization: PVEAPIToken=${PVEAPIToken}" \
+                        "https://${proxmox}:${port}/${api}/json/nodes/${node}/qemu/${vmid}/status/${task}")
+                if grep -qPo "qm${task}" <<< "${status_response}"
+                then
+                        if [[ "${task}" == "stop" ]]
+                        then
+                                status="${task}ped"
+                        else
+                                status="${task}ed"
+                        fi
+                fi
+        fi
+
         if [[ "${status}" == "" ]]
         then
-                echo "The Proxmox server is not responding!"
+                echo "error"
                 exit 1
         else
                 echo "${status}"
         fi
-}
-
-function restartServer()
-{
-        curl    -X "POST" -k \
-                -H "Authorization: PVEAPIToken=${PVEAPIToken}" \
-                "https://${proxmox}:${port}/${api}/json/nodes/${node}/qemu/${vmid}/status/restart"
-}
-
-function startServer()
-{
-        curl    -X "POST" -k \
-                -H "Authorization: PVEAPIToken=${PVEAPIToken}" \
-                "https://${proxmox}:${port}/${api}/json/nodes/${node}/qemu/${vmid}/status/start"
-}
-
-function stopServer()
-{
-        status_response=$(curl -s -X "POST" -k -H "Authorization: PVEAPIToken=${PVEAPIToken}" \
-                "https://${proxmox}:${port}/${api}/json/nodes/${node}/qemu/${vmid}/status/stop")
-        echo "${status_response}"
 }
 
 #Make the option case insensitive
@@ -63,19 +64,18 @@ option="${1^^}"
 
 case "${option}" in
         STATUS)
-        statusCheck
+        vmTask "status"
         ;;
         START)
-        echo "START"
+        vmTask "start"
         ;;
         STOP)
-        stopServer
-        statusCheck
+        vmTask "stop"
         ;;
         RESTART)
-        echo "RESTART"
+        vmTask "reboot"
         ;;
         *)
-        echo "The options are: status, start, stop and restart. Choose one!"
+        echo "CRAP"
         ;;
 esac
