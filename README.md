@@ -38,7 +38,6 @@ proxmox_user.sh
       Just create an API token in Proxmox with the root account, assign it to a the vm you want to control and give it the PVEVMUser rights.
       Usage: bash proxmox_user.sh <task>
       The task can be: status, stop, start or restart
-      So far only the status and stop are implemented, maybe later also add the option to define the vm name to which the commands would be directed to as a parameter.
       
 pwncheck.sh
 '---> Check leak info for email addresses from HaveIBeenPwned. You need a paid API-key to be able to carve data and you also need to set your own user-agent, which can be 
