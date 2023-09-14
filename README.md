@@ -5,6 +5,11 @@ bashcord.sh
 checkQuota
 '---> A cronable script to poll your Elisa consumer mailbox quota and raise alerts if needed.
 
+curlbuster.sh
+'---> Check for filepaths in a domain using a wordlist, where there's the paths you want to test for as one path per line.
+      Run with: bash curlbuster.sh https://targetdoma.in /path/to/wordlist.txt <optional delay between requests as int or decimal>
+      Tip: If you get a lot of 429 responses, increase the delay.
+
 discobot.sh
 '---> A script you can use as a Discord bot that can receive triggers to start, stop, restart and check a Proxmox vm status. Use in combination with proxmox_user.sh (details 
       a few rows further). Doesn't require any parameters, just run with "bash discobot.sh".
