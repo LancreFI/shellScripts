@@ -37,11 +37,12 @@ image_renamer.ps1
       Asks for the directory in which the files are located. Make sure the dir contains only files, no 
       subdirs or anything, as the behaviour's not tested on subdirs. Don't put the script inside the same 
       dir either.
-      You can choose to use the last modification date or the Date taken -value from metadata (image files) as 
-      the new filename (ddMMyy_HHmmss.extension).
+      You can choose to use the last modification date or the Date taken -value from metadata (image files) 
+      as the new filename (ddMMyy_HHmmss.extension).
       
 nameinfo.sh
-'---> Check every kind of DNS-record for a domain, check a couple of common TXT-records, robots file and whois
+'---> Check every kind of DNS-record for a domain, check a couple of common TXT-records, robots file and 
+      whois.
       Just another quick script to check info on a domain, sometimes useful for CTF's.
       Add more power by combining with gitGet.sh and well-known.sh
 
@@ -50,17 +51,17 @@ pingExfil
       
 proxmox_user.sh
 '---> A quick script to control a vm in a Proxmox instance over the Proxmox API
-      Just create an API token in Proxmox with the root account, assign it to a the vm you want to control and 
-      give it the PVEVMUser rights.
+      Just create an API token in Proxmox with the root account, assign it to a the vm you want to 
+      control and give it the PVEVMUser rights.
       Usage: bash proxmox_user.sh <task>
       The task can be: status, stop, start or restart
       
 pwncheck.sh
-'---> Check leak info for email addresses from HaveIBeenPwned. You need a paid API-key to be able to carve 
-      data and you also need to set your own user-agent, which can be anything of your choosing.
+'---> Check leak info for email addresses from HaveIBeenPwned. You need a paid API-key to be able to 
+      carve data and you also need to set your own user-agent, which can be anything of your choosing.
       The script is run by: bash pwncheck.sh email@tobe.check.ed
-      The script only takes one address at a time and sleeps 1.5 seconds between API requests, as it is the 
-      current limit on the API's side.
+      The script only takes one address at a time and sleeps 1.5 seconds between API requests, as it is 
+      the current limit on the API's side.
       You could have multiple addresses in a file, each on it's own row and run multiple searches like:  
       for user in $(cat addresses); do bash pwncheck.sh "${user}"; done
 
@@ -70,13 +71,14 @@ reconv.sh
 
 threePassMethod.sh
 '---> Used at Disobey 2023 CTF, where we kned the ciphertext after first encoding, the result after second 
-      encooding and the result after the first encoding was removed. This would figure out the used Vigenere 
-      cipher keys and decipher the original ciphertext back to text.
+      encooding and the result after the first encoding was removed. This would figure out the used 
+      Vigenere cipher keys and decipher the original ciphertext back to text.
 
 utf2dec.sh
 '---> Convert UTF8 characters to HTML decimal format
-      Ran into problems ages ago when polling Clash Royale API for clan statistics with bash, as the names in 
-      the game can contain basically any characters, including emojis and had to print them into an HTML-page.
+      Ran into problems ages ago when polling Clash Royale API for clan statistics with bash, as the names 
+      in the game can contain basically any characters, including emojis and had to print them into an 
+      HTML-page.
       This script converts characters to UTF8 codepoints and then to (HTML) decimal format.
       Usage example:
             [user@some]$ bash utf2dec.sh sometext
