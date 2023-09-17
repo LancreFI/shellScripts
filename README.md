@@ -30,7 +30,15 @@ gitGet.sh
       Unfinished and tested only on one CTF, where we had the difficulty of having to do too much manual 
       labour :D
       Might be useful together with nameinfo.sh and well-known.sh, maybe I'll bundle these up one day...
-      
+
+ilo_control.sh
+'---> Manage your Proliant running iLO4 over the API.
+      Simple usage: bash ilo_control.sh <status|start|stop|restart>
+      The restart isn't a ForceRestart but rather powercycle from start to stop to start again.
+      You should create a separate account on your iLO4 for just this user and only assign the minimum
+      permissions needed for whatever operations you want to run over iLO. Also there isn't an API-
+      key anywhere but it's just basic auth with the username and password, so create a strong pw.
+            
 image_renamer.ps1
 '---> PowerShell script to rename multiple files within a dir to have their timestamp as the name
       Run (with ISE or your choise of tool):    .\image_renamer.ps1
