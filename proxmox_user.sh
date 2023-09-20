@@ -65,7 +65,7 @@ function vmTask()
 }
 
 #The first parameter to lowercase (only if your vm names in the vmids array is lowercase, 
-#otherwise adjust accordingly
+#otherwise adjust accordingly)
 destination_vm="${1,,}"
 counter=0
 
