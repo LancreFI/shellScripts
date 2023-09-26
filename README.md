@@ -55,7 +55,7 @@ js_decoder.sh
             
 js_encoder.sh
 '---> Encode input, in my use case JavaScript to charcodes, the same you usually do in JS by:
-      variable="string";for(i=0;i<variable.length;i++){console.log(variable.charCodeAt(i))}
+      variable="string";for(i=0;i&lt;variable.length;i++){console.log(variable.charCodeAt(i))}
       Usage: bash js_encoder.sh "some random string or javascript"
 
 js_minify.sh
