@@ -47,7 +47,18 @@ image_renamer.ps1
       dir either.
       You can choose to use the last modification date or the Date taken -value from metadata (image files) 
       as the new filename (ddMMyy_HHmmss.extension).
-      
+
+js_encoder.sh
+'---> Encode input, in my use case JavaScript to charcodes, the same you usually do in JS by:
+      variable="string";for(i=0;i<variable.length;i++){console.log(variable.charCodeAt(i))}
+      Usage: bash js_encoder.sh "some random string or javascript"
+
+js_minify.sh
+'---> A really crude level JavaScript minifier, which has barely been tested. Something I needed at one
+      point and quickly whipped up.
+      Usage: bash js_minify.sh javascript_file.js
+      Note: Only tested with scirpts where every operation is one operation per row and ending with ;
+            
 nameinfo.sh
 '---> Check every kind of DNS-record for a domain, check a couple of common TXT-records, robots file and 
       whois.
