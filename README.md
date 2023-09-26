@@ -51,7 +51,7 @@ image_renamer.ps1
 js_decoder.sh
 '---> Decode input, in my use case charcoded JavaScript. The same thing you'd do with JS by:
       String.fromCharCode(116,114,121,104,52,114,100,101,114)
-      Usage: bash js_decoder.sj "116,114,121,104,52,114,100,101,114"
+      Usage: bash js_decoder.sh "116,114,121,104,52,114,100,101,114"
             
 js_encoder.sh
 '---> Encode input, in my use case JavaScript to charcodes, the same you usually do in JS by:
