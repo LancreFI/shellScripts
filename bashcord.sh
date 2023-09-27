@@ -21,8 +21,9 @@ fi
 last_message=$(cat "${messagefile}")
 message='{"content": "'${1}'"}'
 
-
+#call the function and provide the message to send: sendMessage "n00tn00t"
 function sendMessage() {
+        message='{"content": "'${1}'"}'
         return_response=$(curl -s -X 'POST' \
         -H "Content-Type: application/json" \
         -H "User-Agent: ${user_agent}" \
@@ -32,7 +33,48 @@ function sendMessage() {
         echo "${return_response}"
  }
 
+#call the function and provide the reply message and the message id to reply to:
+#sendReply "n00tn00t" "12345678910"
+function sendReply() {
+        message='{"content": "'${1}'", "message_reference": {"message_id": "'${2}'"}}'
+        return_response=$(curl -s -X 'POST' \
+        -H "Content-Type: application/json" \
+        -H "User-Agent: ${user_agent}" \
+        -H "Authorization: ${auth_header}" \
+        -d "${message}" \
+        "${base_url}/channels/${channel_id}/messages")
+        echo "${return_response}"
+}
 
+#call the function and provide the reply message and the message id of the message out of 
+#which the thread was created of as it is then used like a sub-channel inside the channel:
+#sendReplyToThread "n00tn00t" "12345678910"
+function sendReplyToThread() {
+        message='{"content": "'${1}'"}'
+        return_response=$(curl -s -X 'POST' \
+        -H "Content-Type: application/json" \
+        -H "User-Agent: ${user_agent}" \
+        -H "Authorization: ${auth_header}" \
+        -d "${message}" \
+        "${base_url}/channels/${2}/messages")
+        echo "${return_response}"
+}
+
+#call the function and provide the message id out of which the thread will be created from
+#and a name for the thread: createThread "thread of n00t" "12345678910"
+function createThread() {
+        thread='{"name": "'${1}'", "auto_archive_duration": 60, "location": "Message", "type": 11 }'
+        return_response=$(curl -s -X 'POST' \
+        -H "Content-Type: application/json" \
+        -H "User-Agent: ${user_agent}" \
+        -H "Authorization: ${auth_header}" \
+        -d "${thread}" \
+        "${base_url}/channels/${channel_id}/messages/${2}/threads")
+        echo "${return_response}"
+}
+
+#call the function to get the latest five messages on the channel, doesn't need any parameters
+#you can increase the limit if needed on the url row
 function getMessages() {
         return_response=$(curl -s -X 'GET' \
         -H "Content-Type: application/json" \
