@@ -98,6 +98,9 @@ threePassMethod.sh
       encooding and the result after the first encoding was removed. This would figure out the used 
       Vigenere cipher keys and decipher the original ciphertext back to text.
 
+url_coder.py
+'--> Use to percent encode/decode strings/urls: python3 url_coder.py <encode|decode> "string"
+
 utf2dec.sh
 '---> Convert UTF8 characters to HTML decimal format
       Ran into problems ages ago when polling Clash Royale API for clan statistics with bash, as the names 
