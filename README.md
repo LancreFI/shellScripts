@@ -98,6 +98,12 @@ threePassMethod.sh
       encooding and the result after the first encoding was removed. This would figure out the used 
       Vigenere cipher keys and decipher the original ciphertext back to text.
 
+to_psb64.sh
+'---> As PowerShell uses UTF16LE the "normal" base64 default format from Linux won't do. You can do it with
+      this script instead: bash to_psb64.sh unicode "text_to_base64_encode"
+      If you for example want to encode some nasty payload etc. use the unicode option, in some cases the
+      source might be UTF8, then use utf8 instead of unicode as the first parameter.
+            
 url_coder.py
 '--> Use to percent encode/decode strings/urls: python3 url_coder.py <encode|decode> "string"
 
