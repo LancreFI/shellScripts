@@ -41,18 +41,16 @@ then
                         echo "Server status: ${status}"
                 ;;
                 START)
-                        if [[ "${status}" != "On" ]]
+                        if [[ "${status}" == "Off" ]]
                         then
                                 echo "Starting up the server"
                                 powerControl "On"
-                                while [[ "${status}" != "Off" ]]
-                                do
-                                        if [[ "${wait_counter}" -eq 12 ]]
-                                        then
-                                                echo "Wait limit reached, contact admin"
-                                                exit 1
-                                        fi
-                                        statusCheck
+                        elif [[ "${status}" == "On" ]]
+                        then
+                                echo "The server is already running!"
+                        else
+                                echo "Something's wrong, server has either borked or is unreachable!"
+                        fi
                 ;;
                 STOP)
                         if [[ "${status}" != "Off" ]]
@@ -66,6 +64,7 @@ then
                                                 echo "Wait limit reached, contact admin"
                                                 exit 1
                                         fi
+                                        echo "Shutting down..."
                                         statusCheck
                                         sleep 5
                                         ((wait_counter++))
@@ -87,6 +86,7 @@ then
                                                 echo "Wait limit reached, contact admin"
                                                 exit 1
                                         fi
+                                        echo "Shutting down..."
                                         statusCheck
                                         sleep 5
                                         ((wait_counter++))
@@ -103,6 +103,7 @@ then
                                                 echo "Wait limit reached, contact admin"
                                                 exit 1
                                         fi
+                                        echo "Starting up..."
                                         statusCheck
                                         sleep 5
                                         ((wait_counter++))
@@ -118,6 +119,7 @@ then
                                                 echo "Wait limit reached, contact admin"
                                                 exit 1
                                         fi
+                                        echo "Starting up..."
                                         statusCheck
                                         sleep 5
                                         ((wait_counter++))
