@@ -35,12 +35,13 @@ enumhelper.ps1
             - Get DC info: name, hostname, OS, OS version, IPv4 and IPv6
             - Get AD device info: name, hostname, OS, OS SP, OS version, IPv4 and IPv6
             - Get AD user/group info by SID (converting a SID to a name for example)
+            - Create PsExec.exe or PsExec64.exe
             - SID lookup from AD
             - DCOM lateral movement leveraging MMC
                   - Also the possibility of building a reverse-shell command and initiating it 
                     on the target
             - Remote connectiong over PowerShell
-            - Remote commands over WMI or WINRS
+            - Remote commands over WMI, WINRS, PsExec or PsExec64:
                   - Also the possibility of building a reverse-shell command and initiating it 
                     on the target
             
