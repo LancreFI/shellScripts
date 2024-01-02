@@ -20,7 +20,30 @@ elastic_tool.sh
 '---> Quick info / docs from ElasticSearch
       Just a quick bash-script to get info from ElasticSearch. No need for parameters, should ask for 
       everything needed. Might need to change the /usr/bin/curl part to point to your curl -location.
-      
+
+enumhelper.ps1
+'---> A helper script for AD enumeration and lateral movement. Built on-the-go so might contain a lot of
+      logical fallacies and missing lots of error checks.
+      Check the help section before running: .\enumhelper.ps1 "help" for somewhat of instructions.
+      Can do: 
+            - LDAP queries
+            - User/pass testing over LDAP-query
+            - List all properties of LDAP response object
+            - Get the value of a specific LDAP property
+            - Get all SPNs and related objects
+            - Check if any SPNs are tied to a (service)account
+            - Get DC info: name, hostname, OS, OS version, IPv4 and IPv6
+            - Get AD device info: name, hostname, OS, OS SP, OS version, IPv4 and IPv6
+            - Get AD user/group info by SID (converting a SID to a name for example)
+            - SID lookup from AD
+            - DCOM lateral movement leveraging MMC
+                  - Also the possibility of building a reverse-shell command and initiating it 
+                    on the target
+            - Remote connectiong over PowerShell
+            - Remote commands over WMI or WINRS
+                  - Also the possibility of building a reverse-shell command and initiating it 
+                    on the target
+            
 gitGet.sh
 '---> Carve/download files from public facing .git/ where directory listing is disabled
       Still unfinished. At the moment only downloads from the root dir of a host (target.host/.git/) also 
