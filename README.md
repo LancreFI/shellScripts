@@ -127,4 +127,11 @@ well-known.sh
 '---> Check for /.well-known/ registered URI's (RFC8615)
       Another CTF-script for recon/web.
       Maybe useful to bundle with gitGet.sh and nameinfo.sh
+
+winbin.sh
+'---> Whip up custom executable/dll on the fly. So far only supports creating an x64 executable/dll for 
+      adding a defined user with a defined password to the Administrators group or changing an existing 
+      user's password.
+      For example if you need to replace a bin which you have full control over to gain further foothold 
+      or to leverage a missing DLL etc.
 </pre>
