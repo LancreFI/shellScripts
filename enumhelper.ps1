@@ -563,11 +563,12 @@ elseif ($param1.ToUpper() -eq "CHECKSID" -or $param1.ToUpper() -eq "FINDSID")
 }
 
 #LDAP-search  function
-function ldap_search {	
-    $pdc = [System.DirectoryServices.ActiveDirectory.Domain]::GetCurrentDomain().PdcRoleOwner.Name
-    $dn = ([ADSI]'').distinguishedName
-    $ldap_path = "LDAP://$pdc/$dn"
-    if ($param1.ToUpper() -eq "AUTH")
+function ldap_search 
+{	
+	$pdc = [System.DirectoryServices.ActiveDirectory.Domain]::GetCurrentDomain().PdcRoleOwner.Name
+	$dn = ([ADSI]'').distinguishedName
+	$ldap_path = "LDAP://$pdc/$dn"
+	if ($param1.ToUpper() -eq "AUTH")
 	{
 		$ldap_login_res = New-Object System.DirectoryServices.DirectoryEntry($ldap_path, $param2, $param3)
 		if (-not $ldap_login_res.DistinguishedName)
