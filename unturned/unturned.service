@@ -1,0 +1,14 @@
+[Unit]
+Description=Unturned Server
+After=network.target auditd.service
+StartLimitIntervalSec=0
+
+[Service]
+Type=simple
+Restart=always
+RestartSec=1
+ExecStart=/usr/bin/bash /home/username/server/unturned/ServerHelper.sh
+
+[Install]
+WantedBy=multi-user.target
+Alias=unturned.service
