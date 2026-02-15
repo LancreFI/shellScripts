@@ -16,6 +16,26 @@ discobot.sh
       Proxmox vm status. Use in combination with proxmox_user.sh (details a few rows further). Doesn't 
       require any parameters, just run with "bash discobot.sh".
 
+dividend_tracker.sh
+'---> A script to gather dividend data based on a list of tickers you want to follow. Pushes out horribly
+      ugly HTML list and also sends out data over SCP to some other server where you might be hosting 
+      different bots etc. In my case I have a Signal bot on another server which then pings me the 
+      updated dividend statistics.
+      The format of the stock_list.yaml is:
+            ---
+            # Stock list
+            - ALSYDB:
+                name: AL Sydbank A/S
+                source: Nordnet
+                id: 16099993
+            - SWED_A:
+                name: Swedbank AB Class A
+                source: Nordnet
+                id: 16102010
+            ...
+      You can find the ID by opening the stock details on Nordnet and searching legacyInstrumentId from
+      the source code.
+
 elastic_tool.sh
 '---> Quick info / docs from ElasticSearch
       Just a quick bash-script to get info from ElasticSearch. No need for parameters, should ask for 
