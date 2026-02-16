@@ -131,10 +131,15 @@ update_dividend_data()
                 if [[ ! "${3}" == "noupdate" ]]
                 then
                         dividend_url="${nordnet_instrument_actions}${instrument}${nordnet_dividends}"
-                        old_checksum=$(md5sum "${data_folder}${dividend_datafile}" | cut -f1 -d" ")
+                        old_checksum=$(cut -d"," -f1-10 "${data_folder}${dividend_datafile}" | md5sum | cut -d" " -f1)
                         curl -s -X "GET" "${dividend_url}" -o "${data_folder}${dividend_datafile}"
+                        new_checksum=$(cut -d"," -f1-10 "${data_folder}${dividend_datafile}" | md5sum | cut -d" " -f1)
+                        ##If there is no dividend data, obviously not pinging the user
+                        if grep '"status":404' "${data_folder}${dividend_datafile}"
+                        then
+                                ping="no"
                         ##Checksum comparison between the old and new dividend data files
-                        if [[ "${old_checksum}" != $(md5sum "${data_folder}${dividend_datafile}" | cut -f1 -d" ") ]]
+                        elif [[ "${old_checksum}" != "${new_checksum}" ]]
                         then
                                 ping="yes"
                         fi
