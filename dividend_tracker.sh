@@ -128,7 +128,7 @@ update_dividend_data()
         if [[ "${src}" == "nordnet" ]]
         then
                 dividend_datafile="${slug}_dividend_data.json"
-                if [[ ! "${3}" == "noupdate" ]]
+                if [[ "${4}" != "noupdate" ]]
                 then
                         dividend_url="${nordnet_instrument_actions}${instrument}${nordnet_dividends}"
                         old_checksum=$(cut -d"," -f1-10 "${data_folder}${dividend_datafile}" | md5sum | cut -d" " -f1)
@@ -144,7 +144,7 @@ update_dividend_data()
                                 ping="yes"
                         fi
                         ##Add a ping tag and remove it later, this triggers the pinging of the user
-                        sed -i 's/^{/{"ping":"yes",/' "${data_folder}${dividend_datafile}"
+                        sed -i 's/^{/{"ping":"'"${ping}"'",/' "${data_folder}${dividend_datafile}"
                 fi
 
                 if [[ ! -r "${data_folder}${dividend_datafile}" ]]
@@ -176,7 +176,7 @@ update_instrument_data()
         if [[ "${src}" == "nordnet" ]]
         then
                 instrument_datafile="${slug}_data.json"
-                if [[ ! "${id}" == "noupdate" ]]
+                if [[ "${id}" != "noupdate" ]]
                 then
                         instrument_figures_url="${nordnet_instrument_figures}${id}"
                         client_header="Client-Id: NEXT"
@@ -290,7 +290,7 @@ else
 fi
 
 ##WRITE HTML HEAD
-printf "<html>\n\t<head>\n\t\t<title>StockTracker</title>\n\t</head>\n\t<body style='background-color:#99cccc'>\n\t\t<table border=1>\n\t\t" > "${html_output}"
+printf "<html>\n\t<head>\n\t\t<title>StockTracker</title>\n\t</head>\n\t<body style='background-color:#696969'>\n\t\t<table border=1>\n\t\t" > "${html_output}"
 
 ##PARSE DATA
 echo "Parsing details from data"
@@ -335,25 +335,35 @@ do
                         status=$(grep -Po "status\":\"[\w_]*?\"" <<< "${event}" | sed -e 's/^.*:"//' -e 's/"//' -e 's/_/ /g');
                         if [[ "${status,,}" == "upcoming x date" ]]
                         then
-                                text_color=" style='color:green; font-weight:bold'"
+                                text_color=" style='color:#00ff00; font-weight:bold'"
+                        elif [[ "${status,,}" == "x date today" ]]
+                        then
+                                text_color=" style='color:#ff00ff; font-weight:bold'"
+                        elif [[ "${status,,}" == "upcoming payment date" ]]
+                        then
+                                text_color=" style='color:#ffff00; font-weight:bold'"
                         else
-                                text_color=" style='color:red'"
+                                text_color=" style='color:#ff0000'"
                         fi
 
-                        if [[ "${status,,}" == "upcoming x date" ]] || [[ "${dividend_output_counter}" -eq 0 ]]
+
+                        if [[ "${status,,}" == "upcoming x date" ]] || [[ "${status,,}" == "x date today" ]] || [[ "${status,,}" == "upcoming payment date" ]] || [[ "${dividend_output_counter}" -eq 0 ]]
                         then
                                 printf "\n\t\t\t</tr>\n\t\t\t<tr>\n\t\t\t\t<td ${text_color}>Status: ${status,,}  Type: ${dividend_type}</td>" >> "${html_output}"
                                 printf "\n\t\t\t</tr>\n\t\t\t<tr>\n\t\t\t\t<td ${text_color}>${value} ($currency)</td>" >> "${html_output}"
                                 printf "\n\t\t\t</tr>\n\t\t\t<tr>\n\t\t\t\t<td ${text_color}>Ex-date: ${ex_date}  Payment: ${payment_date}</td>" >> "${html_output}"
                                 printf "\n\t\t\t</tr>" >> "${html_output}"
                                 ##There might be additional dividens announced same time and will show as two different events
-                                if [[ "${dividend_ping}" == "yes" ]] && [[ "${status,,}" == "upcoming x date" ]]
+                                if [[ "${dividend_ping}" == "yes" ]]
                                 then
-                                        if [[ "${dividend_output_counter}" -eq 0 ]]
+                                        if [[ "${status,,}" == "upcoming x date" ]] || [[ "${status,,}" == "x date today" ]] || [[ "${status,,}" == "upcoming payment date" ]]
                                         then
-                                                pinger_data="${symbol}: ${name}\n  Status: ${status,,}\nCurrent price: ${current_value} (${currency})\n\n  Type: ${dividend_type}\n  Dividend: ${value} ($currency)\n  Ex-date: ${ex_date}\n  Payment: ${payment_date}\n"
-                                        else
-                                                pinger_data+="\n\n  Status: ${status,,}\n  Type: ${dividend_type}\n  Dividend: ${value} ($currency)\n  Ex-date: ${ex_date}\n  Payment: ${payment_date}\n"
+                                                if [[ "${dividend_output_counter}" -eq 0 ]]
+                                                then
+                                                        pinger_data="${symbol}: ${name}\nCurrent price: ${current_value} (${currency})\n\n  Status: ${status,,}\n  Type: ${dividend_type}\n  Dividend: ${value} ($currency)\n  Ex-date: ${ex>
+                                                else
+                                                        pinger_data+="\n\n  Status: ${status,,}\n  Type: ${dividend_type}\n  Dividend: ${value} ($currency)\n  Ex-date: ${ex_date}\n  Payment: ${payment_date}\n"
+                                                fi
                                         fi
                                 fi
                                 ((dividend_output_counter++))
