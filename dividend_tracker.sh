@@ -135,7 +135,7 @@ update_dividend_data()
                         curl -s -X "GET" "${dividend_url}" -o "${data_folder}${dividend_datafile}"
                         new_checksum=$(cut -d"," -f1-10 "${data_folder}${dividend_datafile}" | md5sum | cut -d" " -f1)
                         ##If there is no dividend data, obviously not pinging the user
-                        if grep '"status":404' "${data_folder}${dividend_datafile}"
+                        if grep -sq '"status":404' "${data_folder}${dividend_datafile}"
                         then
                                 ping="no"
                         ##Checksum comparison between the old and new dividend data files
@@ -298,7 +298,7 @@ echo "${divider}"
 for file in "${instrument_datafiles[@]}"
 do
         data_file="${data_folder}${file}"
-        if ! grep '"status":404' "${data_file}"
+        if ! grep -sq '"status":404' "${data_file}"
         then
                 instrument=$(grep -Po '"display_slug":".*?"' "${data_file}" | sed -e 's/^.*:"//' -e 's/"//' | head -1)
                 instrument_data="${data_folder}${instrument}_data.json"
