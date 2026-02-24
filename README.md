@@ -36,6 +36,9 @@ dividend_tracker.sh
       You can find the ID by opening the stock details on Nordnet and searching legacyInstrumentId from
       the source code.
 
+      The v0.1 uses old Plotly.js for the plots: https://cdn.plot.ly/plotly-latest.min.js (saved locally 
+      as plotly.js)
+
 elastic_tool.sh
 '---> Quick info / docs from ElasticSearch
       Just a quick bash-script to get info from ElasticSearch. No need for parameters, should ask for 
