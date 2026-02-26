@@ -28,7 +28,7 @@ create_banner()
 {
         echo "${divider}"
         echo "|                                                                                   |"
-        echo "|                              DividendTracker v0.1                                 |"
+        echo "|                              DividendTracker v0.2                                 |"
         echo "|                                                                                   |"
         echo "${divider}"
 }
@@ -475,8 +475,9 @@ do
                         dividend_exdates+=("${ex_date}")
                         dividend_status+=("${status}")
                         dividend_types+=("${dividend_type}")
+                        status=$(sed 's/_/ /g' <<< "${status}")
 
-                        if [[ "${status,,}" == "upcoming x date" ]] || [[ "${status,,}" == "x date today" ]] || [[ "${status,,}" == "upcoming payment date" ]] || [[ "${dividend_output_counter}" -eq 0 ]]
+                        if [[ "${status,,}" == "upcoming x date" ]] || [[ "${status,,}" == "x date today" ]] || [[ "${status,,}" == "upcoming payment date" ]] || [[ "${status,,}" == "payment date today" ]] || [[ "${dividend_output_counter}" -eq 0 ]]
                         then
                                 ##There might be additional dividens announced same time and will show as two different events
                                 if [[ "${dividend_ping}" == "yes" ]]
