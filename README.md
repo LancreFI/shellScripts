@@ -10,6 +10,11 @@ curlbuster.sh
       path per line. Run with: 
       bash curlbuster.sh https://targetdoma.in /path/to/wordlist <optional delay between requests int/dec>
       Tip: If you get a lot of 429 responses, increase the delay.
+            
+collect_citrix_data.sh
+'---> Collect Citrix tech blog data to spot any recent vulns etc. Ingestible by Grafana tables,
+      unfortunately Citrix wants to try and prevent scraping for this data and isn't really providing any
+      free feed for automation.
 
 discobot.sh
 '---> A script you can use as a Discord bot that can receive triggers to start, stop, restart and check a 
